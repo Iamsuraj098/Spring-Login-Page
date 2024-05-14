@@ -1,0 +1,147 @@
+Spring MVC;
+-> Spring MVC is a sub frame of spring framework through which is used to build a web application
+	M = Model
+	V = View
+	C = Controller
+-> It is build on Servlet API. This means in background MVC used the Servlet code.
+-> It follow the Model-View-Controller pattern. 
+-> Model refers data	View refers presentation	Controller refers Flow of data
+-> It implements all features of SPring Core concept like Inversion of Control, Dependency Injection.	
+____________________________________________________________________________________________________________
+** Why Spring MVC:
+
+-> Separate each roles - model, view and controller.
+-> In servlet we write code inside a single file this make highly tight coupled and very difficult to manage. If we want to do changes in code, its 	tough. But inside Spring MVC have no such issues.  
+-> Powerful Configuration (we used XMl, Annotation).
+-> Our application is loosely coupled. Here we can used core concept of Spring Framework.
+-> Rapid Application Development.
+-> Spring MVC is very flexible (supportable with JSP, Velocity framework etc), easy to test and much features.
+____________________________________________________________________________________________________________
+MVC Design Pattern:
+
+-> Design Pattern: it is order of arranging things/codes. It say about organising data.
+-> Way to organize the code in our application.
+-> M = Model	V = View	C = Controller
+-> Model 		- Data
+-> View 		- Data representation
+-> Controller 	- Interface between model and view.
+-> We already used MVC during study of JSP/Servlet. Here JSP code converted into Servlet code. If we send any request it accepted by Servlet and 	response give by servlet(vice-versa). Here servlet work as Controller and JSP only work as View.
+-> JSP used for dynamic pages while HTML used for static pages.
+______________________________________________________________________________________________________________
+** Problem without MVC Design Pattern:
+-> If we not MVC design pattern then code is
+	a) run slow
+	b) tightly coupled
+	c) parallel processing not possible.
+-> From Image1 reference : Take order - work as controller	Prepare Food - work as Service layer or Business layer	Delivery - View.
+______________________________________________________________________________________________________________
+**** Working of Spring MVC: (Refer to Working.png image).
+-> Spring MVC work on Client-Server Architecture.
+-> Client-Server Architecture in context of Sprig MVC
+	step 1) Client send request toward server.
+	step 2) Inside server this request accepted by Front Controller.
+	step 3) Front Controller used ther Handler Mapping to send the client request to Controller.
+	step 4) Controller send two thing to Front Controller - Model(data) and Name of View.
+	step 5) Front Controller used the View Resolver to send Model toward View Template (this view template name was provided by Controller).
+	step 6) Inside view template, model(data) is fitted.
+	step 7) View template return the control towards Front Controller.
+	step 8) Front Controller send response to client. 
+
+-> Other info: Front COntroller has class name is DispatcherServlet 
+			   Controller basically made up of number of different service and business class.
+			   View Template contains the JSP files.
+			   Server we used Tomcat Server.
+			   Handler Mapping is used by Front Controller to send client request toward Controller.
+			   View Resolver is used by Front Controller so it send model(data) toward correct JSP file.
+_________________________________________________________________________________________________________________
+** Five Step to configure Spring MVC: (Imp) refer to file web.xml, spring_servlet.xml, index.jsp, HomeController.java.
+step 1) Configure the dispatcher servlet in web.xml
+step 2) Create Spring Configuration File
+step 3) Configure View Resolver
+step 4) Create Controller
+step 5) Create a View to show(page)
+__________________________________________________________________________________________________________________
+Spring MVC: Sending Data from Controller and View
+-> Here sending dynamic data from controller to JSP file.
+-> Every time data is transferred between UI and backend. 
+-> With help of Controller we send data to View(JSP file)
+-> To sending data from controller and view: we have to clear two object :
+	a) Model: with help of this we send data from controller to view
+	b) Model and View: same thing we can do.
+	
+-> Model:  refer to index.jsp and HomeController.java
+		it give us a function/method called "addAttribute(String key, Object value)". 
+		There are many method to send data but currently we used the "addAttribute" method.
+		String key: with help of key name we access the data.
+		Object value: it contain the value which we pass.
+		
+-> Model and View: refer to play.jsp and HomeController.java
+		it give us a function/method called "addAttribute(String key, Object value)".
+		All the work are same as Model method.
+		Here some step are involve to write code:
+			a) method which is of type ModelAndView.
+			b) this method return object of ModelAndView.
+			c) To set the View File name we use "" objectOfModelandView.setViewName("name_jsp_file"); ""
+-> Now getting data in JSP file:
+		By using scriptlet tag we fetch data.
+		<% request.getAttribute("key_name")%>
+
+-> Some previous JSP/Servlet topic like: JSP Expression language: by using this we have not to used " request.getAttribute("name"); "
+___________________________________________________________________________________________________________________
+Sending data from View to Controller: "Refer to ContactController.java and Form.jsp file"
+-> Using HTML Form
+-> We can send data from frontend to backend by using Link
+
+what happening behind this:
+-> User fill the form and submit.
+-> Its filled data come through link.
+-> We get all user data using HTTPServletRequest.
+-> In servlet we use the a method to get user data, which "getParameter("name_of_field")". This traditional and time taking method, for each 
+field we have to write same code. To avoid it we used "@RequestParam".
+-> "@RequestParam" by using this in few line of code we get all users data. It give single data at a time.
+-> "@ModelAttribute" it all data in a single time.
+
+-> Note: method inside the form is same as the method inside @RequestMapping, otherwise it throw error.
+	ex: <form action="Process" method="post"></form>
+		@RequestMapping(path="/Process", method = RequestMethod.POST)
+
+-> @ModelAttribute: In a single line of code we send all data to JSP pages.
+	Syntax: @ModelAttribute class_name name_through_which_all_attribute
+	Note1: Parameter which we define in User.java are same as name in Form.jsp otherwise it through error.
+	Note2: if we want to add some common data to all file then we use @ModelAttribute. Without calling from anywhere inside java file it 			automatically run. We have call in JSP file where we have to required.
+			Ex: @ModelAttribute
+				public void method_name(Model model){
+					model.addAttribute("header", "Spring framework");
+					model.addAttribute("text", "Learning is going on");
+				}
+		
+
+___________________________________________________________________________________________________________________
+Whole about "@ResquestMapping" Annotation: Refer to HomeController.java file
+-> It used to map the URL
+-> This url mapping called handler mapping 
+-> We can use handler mapping over class or method
+
+-> if we use handler mapping over method then simple writing file name after project_file name we can open that file.	/project_name/method
+-> if we write handler mapping over class then again use hander mapping over method then we have write first handler mapping name of class 
+then handler mapping name of method after project_name.		/project_name/class/method
+
+-> Attribute with @RequestMapping is
+	a) path: use to set path, ex: @RequestMapping(path="/home")
+	b) method: here we define get/post/delete/put etc used. ex: @RequestMapping(path="/home", method=RequestMethod.GET)
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

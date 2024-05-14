@@ -1,0 +1,12 @@
+What is AOP? 
+-> AOP is stands for Aspect Oriented Programming.
+-> AOP is programming paradigm that aim to increase modularity by allowing the separation of cross-cutting concerns.
+-> AOP can be used with object-oriented programming ( OOP ).
+-> An aspect is a subprogram that is associated with a specific property of a program.
+-> It can be defined as the breaking of code into different modules, also known as modularisation, where the aspect is the key unit of modularity. Aspects enable the implementation of crosscutting concerns such as- transaction, logging not central to business logic without cluttering the code core to its functionality. It does so by adding additional behaviour that is the advice to the existing code.
+
+Important Terminology:
+1. Aspect
+2. Join Point
+3. Advice
+4. PointCut 

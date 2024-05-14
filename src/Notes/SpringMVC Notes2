@@ -1,0 +1,51 @@
+##  Sprig MVC + Spring ORM:  ##
+
+->Flow of data:  |Contact Controller| -> |Service Layer| -> |User Dao| -> |Data Base|
+-> these all four are Class.
+
+____________________________________________________________________________________
+RedirectView in Spring MVC:
+
+Redirect in Spring MVC is a mechanism that allows you to send a request to a different URL. This can be useful for a variety of reasons, such as when you need to send a user to a different page after they have submitted a form, or when you need to redirect a user to a different page based on their role.
+
+
+0) HTTPServletResponse: Its a old method, here we make an object using "HTTPServletResponse response"
+	-> response.sendRedirect("pass_url");
+
+1) Redirect prefix: Refer to Recontroller.class file.
+	-> By using Redirect prefix we can call another web page from current web page.
+	-> Syntax: public String handler_name(){ 
+					return "redirect:/url_name or url_path";
+				}
+	
+2) RedirectView: Refer to Recontroller.class file.
+	-> By using RedirectView we can call another web page from current web page.
+	-> Here RedirectView is function which return RedirectView Object.
+	-> Syntax: public RedirectView handler_name(){ 
+					RedirectView redirectView = new RedirectView(); 
+					redirect.serUrl("path_name"); 
+					return redirectView;
+				}
+	-> Benefit of RedirectView over Redirect is by redirectView we can set URL of different web sites.
+	
+Use of Redirect or other method: 
+1) In any case in form any input is blank then we redirect the same page by adding some detail.
+2) In any case we want to go another site after adding data then use redirect.
+____________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
